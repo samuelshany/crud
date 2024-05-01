@@ -60,108 +60,53 @@ button {
                 <div class="lds-pos"></div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Main wrapper - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+
         <div id="main-wrapper">
-            <!-- ============================================================== -->
-            <!-- Topbar header - style you can find in pages.scss -->
-            <!-- ============================================================== -->
+
             <header class="topbar">
                 <nav class="navbar top-navbar navbar-expand-lg navbar-dark">
                     <div class="navbar-header">
                         <!-- This is for the sidebar toggle which is visible on mobile only -->
                         <a class="nav-toggler waves-effect waves-light d-block d-lg-none" href="javascript:void(0)"><i
                                 class="ti-menu ti-close"></i></a>
-                        <!-- ============================================================== -->
-                        <!-- Logo -->
-                        <!-- ============================================================== -->
+
                         <a class="navbar-brand" href="index.html">
                             <!-- Logo icon -->
                             <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
 
 
                             </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+
                             <span class="logo-text">
-                                <!-- dark Logo text -->
+
 
                             </span>
                         </a>
-                        <!-- ============================================================== -->
-                        <!-- End Logo -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Toggle which is visible on mobile only -->
-                        <!-- ============================================================== -->
+
                         <a class="topbartoggler d-block d-lg-none waves-effect waves-light" href="javascript:void(0)"
                             data-toggle="collapse" data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
                                 class="ti-more"></i></a>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
+
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                        <!-- ============================================================== -->
-                        <!-- toggle and nav items -->
-                        <!-- ============================================================== -->
+
                         <ul class="navbar-nav mr-auto float-left">
-                            <!-- This is  -->
-                            <!--   <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li> -->
-                            <!-- ============================================================== -->
-                            <!-- Search -->
 
-                            <!-- ============================================================== -->
-                            <!-- Mega Menu -->
-                            <!-- ============================================================== -->
-
-                            <!-- ============================================================== -->
-                            <!-- End Mega Menu -->
-                            <!-- ============================================================== -->
                         </ul>
-                        <!-- ============================================================== -->
-                        <!-- Right side toggle and nav items -->
-                        <!-- ============================================================== -->
+
                         <ul class="navbar-nav ">
-                            <!-- ============================================================== -->
-                            <!-- Comment -->
-                            <!-- ============================================================== -->
 
-                            <!-- ============================================================== -->
-                            <!-- End Comment -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- Messages -->
-                            <!-- ============================================================== -->
-
-                            <!-- ============================================================== -->
-                            <!-- End Messages -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- Profile -->
-                            <!-- ============================================================== -->
                             <li class="nav-item dropdown">
 
 
                             </li>
-                            <!-- ============================================================== -->
-                            <!-- Language -->
-                            <!-- ============================================================== -->
 
                         </ul>
                     </div>
                 </nav>
             </header>
-            <!-- ============================================================== -->
-            <!-- End Topbar header -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Left Sidebar - style you can find in sidebar.scss  -->
-            <!-- ============================================================== -->
+
             <aside class="left-sidebar">
                 <!-- Sidebar scroll-->
                 <div class="">
@@ -199,9 +144,11 @@ button {
                   </div>
 </div>
 <div class="d-flex justify-content-center">
+    <button id="btn-backwardL" class="btn "><i class="arrow left"></i><i class="arrow left"></i></button>
     <button id="btn-backward" class="btn "><i class="arrow left"></i></button>
 
     <button id="btn-forward"><i class="arrow right"></i></button>
+    <button id="btn-forwardL"><i class="arrow right"></i><i class="arrow right"></i></button>
 </div>
 
 
@@ -251,7 +198,8 @@ function fetchdata()
 
 const btnBackward = document.getElementById('btn-backward');
 const btnForward = document.getElementById('btn-forward');
-
+const btnBackwardL = document.getElementById('btn-backwardL');
+const btnForwardL = document.getElementById('btn-forwardL');
 // Function to create product divs
 function createProductDiv(product) {
   const div = document.createElement('div');
@@ -322,9 +270,12 @@ myButton.addEventListener('click', function() {
 
 });
 // Function to load products in the container
+let productss = 0;
 function loadProducts(products) {
+   
   productContainer.innerHTML += '';
   products.forEach(product => {
+    productss ++;
     const productDiv = createProductDiv(product);
     productContainer.appendChild(productDiv);
   });
@@ -339,10 +290,20 @@ function handleBackwardClick() {
 function handleForwardClick() {
   productContainer.scrollBy(productContainer.offsetWidth, 0);
 }
+function handleBackwardLClick() {
+    console.log(productss);
+  productContainer.scrollBy(- (productContainer.offsetWidth * productss), 0);
+}
 
+// Function to handle forward button click
+function handleForwardLClick() {
+  productContainer.scrollBy(productContainer.offsetWidth*productss, 0);
+}
 // Add event listeners to buttons
 btnBackward.addEventListener('click', handleBackwardClick);
 btnForward.addEventListener('click', handleForwardClick);
+btnBackwardL.addEventListener('click', handleBackwardLClick);
+btnForwardL.addEventListener('click', handleForwardLClick);
 $( document ).ready(function() {
     fetchdata();
 });
